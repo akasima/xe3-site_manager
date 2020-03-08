@@ -1,0 +1,37 @@
+{
+  "name": "xpressengine-plugin/site_manager",
+  "description": "This Package is Xpressengine Plugin - SiteManager plugin.",
+  "keywords": [
+    "xpressengine",
+    "plugin"
+  ],
+  "license": "LGPL-3.0-or-later",
+  "version": "1.0.0",
+  "type": "xpressengine-plugin",
+  "support": {
+    "email": "akasima@gmail.com"
+  },
+  "authors": [
+    {
+      "name": "akasima",
+      "email": "akasima@gmail.com",
+      "homepage": "http://www.joabee.com",
+      "role": "Developer"
+    }
+  ],
+  "extra": {
+    "xpressengine": {
+      "title": "SiteManager plugin",
+      "component": {}
+    }
+  },
+  "require": {
+    "xpressengine/xpressengine": "~3.0.6",
+    "laravel-admin-ext/log-viewer": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Akasima\\XePlugin\\SiteManager\\": "src/"
+    }
+  }
+}
