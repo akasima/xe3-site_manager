@@ -30,7 +30,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Akasima\\XePlugin\\SiteManager\\": "src/"
+      "Akasima\\XePlugin\\SiteManager\\": "src/",
+      "Encore\\Admin\\LogViewer\\": "libs/laravel-admin-ext/log-viewer/src"
     }
   }
 }

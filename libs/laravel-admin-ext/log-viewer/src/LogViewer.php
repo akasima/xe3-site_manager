@@ -2,12 +2,10 @@
 
 namespace Encore\Admin\LogViewer;
 
-use Encore\Admin\Extension;
-
 /**
  * Class LogViewer.
  */
-class LogViewer extends Extension
+class LogViewer
 {
     use BootExtension;
 
