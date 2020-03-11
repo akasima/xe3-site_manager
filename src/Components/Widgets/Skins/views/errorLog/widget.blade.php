@@ -21,7 +21,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>에러 로그34</th>
+                    <th>에러 로그</th>
                     <th></th>
                 </tr>
                 </thead>

@@ -4,6 +4,8 @@ namespace Encore\Admin\LogViewer;
 
 /**
  * Class LogViewer.
+ *
+ * @akasima remove 'extends Extension' for using simply
  */
 class LogViewer
 {
