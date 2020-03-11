@@ -121,35 +121,48 @@ class Controller extends BaseController
     // 편리하게
     public function setupHandy()
     {
-        // ssl 항상 사용
-        // 디버그 끄기
-        // 메일 설정
-        //
+        $configRepo = app('config');
+        $config = $configRepo->all();
+        $appEnv = $config['app']['env'];
+
+        return XePresenter::make('site_manager::views.setupHandy', [
+            'configRepo' => $configRepo,
+            'config' => $config,
+            'appEnv' => $appEnv,
+        ]);
     }
 
-    public function updateHandy()
+    public function updateHandy(Request $request, Handler $handler)
     {
+        $configRepo = app('config');
+        $config = $configRepo->all();
 
-    }
+        $inputs = $request->except('_token');
+        foreach ($inputs as $keyHint=>$value) {
+            // value fix
+            if ($value == 'true') {
+                $value = true;
+            } elseif ($value == 'false') {
+                $value = false;
+            }
 
+            $parts = explode('/', $keyHint);
+            $key = array_shift($parts);
+            $configName = implode('.', $parts);
 
-    public function setupFileConfig()
-    {
+            $currentConfig = [];
+            $file = sprintf( '%s/%s/%s.php', config_path(), $config['app']['env'], $key);
+            if (file_exists($file) == true) {
+                $currentConfig = include($file);
+            }
+            array_set($currentConfig, $configName, $value);
 
-    }
+            $handler->configFileGenerate($key, $currentConfig);
+        }
 
-    public function updateFileConfig()
-    {
-
-    }
-
-    public function setupDBConfig()
-    {
-
-    }
-
-    public function updateDBConfig()
-    {
-
+        return redirect()->route('settings.site_manager.setupHandy')->with('alert', [
+            'type' => 'info',
+            'message' => '변경되었습니다.',
+        ]);
     }
 }

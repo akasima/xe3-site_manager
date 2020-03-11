@@ -52,10 +52,15 @@ class Plugin extends AbstractPlugin
             Route::get('/phpinfo', ['as' => 'settings.site_manager.phpinfo', 'uses' => 'Controller@phpinfo']);
             Route::get('/solution/{type}', ['as' => 'settings.site_manager.solution', 'uses' => 'Controller@solution']);
 
+            Route::get('/setup/handy', ['as' => 'settings.site_manager.setupHandy', 'uses' => 'Controller@setupHandy']);
+            Route::post('/update/handy', ['as' => 'settings.site_manager.updateHandy', 'uses' => 'Controller@updateHandy']);
+
             Route::get('/get_log_file/{file?}', ['as' => 'settings.site_manager.getLogFile', 'uses' => 'Controller@getLogFile']);
             Route::get('/get_log_file/{file}/tail', ['as' => 'settings.site_manager.getLogFileTail', 'uses' => 'Controller@getLogFileTail']);
             Route::get('/download_log_file/{file}', ['as' => 'settings.site_manager.downloadLogFile', 'uses' => 'Controller@downloadLogFile']);
         }, ['namespace' => 'Akasima\XePlugin\SiteManager']);
+
+
 
         // for checking enable rewrite
         Route::group(

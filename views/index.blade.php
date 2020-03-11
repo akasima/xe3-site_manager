@@ -87,4 +87,20 @@
             </div>
         </div>
     </div>
+
+    <div class="row log-clear">
+        <div class="col-sm-12">
+            <div class="panel-group">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Setup Handy</h3>
+                        <p class="help-block">설정을 편리하게 관리할 수 있도록 지원합니다..</p>
+                    </div>
+                    <div class="panel-body">
+                        <p><a href="{{route('settings.site_manager.setupHandy')}}" class="xe-btn xe-btn-primary">설정페이지 이동</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -224,4 +224,69 @@ class Handler
         app('xe.config')->modify($pluginConfig);
         return '[composer home path] changed to [' . $path . '].';
     }
+
+    public function configFileGenerate($key, array $data)
+    {
+        $dir = config_path() . '/' . env('APP_ENV', 'production');
+        $this->makeDir($dir);
+
+        $data = $this->encodeArr2Str($data);
+
+        $file = $dir . "/{$key}.php";
+        file_put_contents($file, '<?php' . str_repeat(PHP_EOL, 2) . 'return [' . PHP_EOL . $data . '];' . PHP_EOL);
+    }
+
+    public function makeDir($dir)
+    {
+        /** @var Filesystem $filesystem */
+        $filesystem = app('files');
+        if (!$filesystem->isDirectory($dir)) {
+            return $filesystem->makeDirectory($dir);
+        }
+
+        return true;
+    }
+
+    /**
+     * Encode array to string.
+     *
+     * @param array $arr   array
+     * @param int   $depth depth
+     * @return string
+     */
+    public function encodeArr2Str(array $arr, $depth = 0)
+    {
+        $output = '';
+
+        foreach ($arr as $key => $val) {
+            if (is_array($val)) {
+                $output .= $this->getIndent($depth) . "'{$key}' => " . '[' . PHP_EOL . $this->encodeArr2Str($val, $depth + 1) . $this->getIndent($depth) . '],' . PHP_EOL;
+            } else {
+                if (is_bool($val)) {
+                    $val = $val ? 'true' : 'false';
+                } elseif (!is_int($val)) {
+                    $val = "'{$val}'";
+                }
+                $output .= $this->getIndent($depth) . "'{$key}' => " . $val .',' . PHP_EOL;
+            }
+        }
+
+        return $output;
+    }
+
+    /**
+     * Get indent.
+     *
+     * @param int $depth depth
+     * @return string
+     */
+    public function getIndent($depth)
+    {
+        $indent = '';
+        for ($a = 0; $a <= $depth; $a++) {
+            $indent .= str_repeat(' ', 4);
+        }
+
+        return $indent;
+    }
 }
