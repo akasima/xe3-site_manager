@@ -125,6 +125,9 @@ class Controller extends BaseController
         $config = $configRepo->all();
         $appEnv = $config['app']['env'];
 
+        if (isset($config['xe']['console_allow_url_fopen']) == false) {
+            $config['xe']['console_allow_url_fopen'] = true;
+        }
         return XePresenter::make('site_manager::views.setupHandy', [
             'configRepo' => $configRepo,
             'config' => $config,
