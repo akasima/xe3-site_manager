@@ -222,7 +222,8 @@ class Handler
     {
         // composer home path config
         $pluginConfig = app('xe.config')->get('plugin');
-        $path = storage_path('framework');
+        $path = storage_path('framework/composer');
+        $this->makeDir($path);
         $pluginConfig->set('composer_home', $path);
         app('xe.config')->modify($pluginConfig);
         return '[composer home path] changed to [' . $path . '].';
