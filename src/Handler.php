@@ -2,9 +2,12 @@
 namespace Akasima\XePlugin\SiteManager;
 
 use File;
+use App\Http\Controllers\ArtisanBackgroundHelper;
 
 class Handler
 {
+    use ArtisanBackgroundHelper;
+
     public function serverEnv()
     {
         $data = [];
@@ -223,6 +226,26 @@ class Handler
         $pluginConfig->set('composer_home', $path);
         app('xe.config')->modify($pluginConfig);
         return '[composer home path] changed to [' . $path . '].';
+    }
+
+    public function solutionUpdateTranslation()
+    {
+        $updateLists = ['core'];
+        $this->runArtisan('translation:import');
+
+        $pluginConfig = app('xe.config')->get('plugin');
+        foreach($pluginConfig->get('list') as $name => $info) {
+            if (isset($info['status']) && $info['status'] == 'deactivated') {
+                continue;
+            }
+
+            $updateLists[] = $name;
+            $this->runArtisan('translation:import', [
+                'name' => $name,
+            ]);
+        }
+
+        return '[update translations] of [' . implode(', ' , $updateLists) . '].';
     }
 
     public function configFileGenerate($key, array $data)
