@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <label class="">관리자 인증 시간</label>
                                         <input class="form-control" name="auth/admin/expire" value="{{$config['auth']['admin']['expire']}}">
-                                        <p class="help-block">관리자 사이트에서 2중 잠금 기능 사용에 대한 설정입니다. 관리자 인증이 사용하지 않으려면 '0'을 입력하세요.</p>
+                                        <p class="help-block">관리자 사이트에서 2중 잠금 기능 사용에 대한 설정입니다. 관리자 인증을 사용하지 않으려면 '0'을 입력하세요.</p>
                                     </div>
                                 </div>
                             </div>
