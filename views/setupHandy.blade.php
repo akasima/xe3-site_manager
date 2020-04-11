@@ -31,6 +31,8 @@
                                         <p class="help-block">사용 설정하면 사용자 페이지의 모든 http 요청을 https로 보냅니다.(관리자 예외)</p>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6 form-col-logoType">
                                     <div class="form-group">
                                         <label class="">콘솔 allow url fopen</label>
@@ -39,6 +41,16 @@
                                             <option value="true" @if($config['xe']['console_allow_url_fopen'] == true)selected="selected"@endif>사용</option>
                                         </select>
                                         <p class="help-block">업데이트할 때 allow url fopen 지원 유무 설정 (사용 권장, 사용 안함 설정하는 경우 웹서버 타임아웃 확인 필요, 사용함 설정후 업데이트 장애 발생하는 경우 사용안함 설정)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-col-logoType">
+                                    <div class="form-group">
+                                        <label class="">Composer 캐시 사용</label>
+                                        <select class="form-control" name="xe/composer_no_cache">
+                                            <option value="false" >사용 안함</option>
+                                            <option value="true" @if($config['xe']['composer_no_cache'] == true)selected="selected"@endif>사용</option>
+                                        </select>
+                                        <p class="help-block">Composer는 속도 향상을 위해 캐시를 사용합니다. 하지만 캐시를 사용하면 <strong>1GB 정도 디스크를 사용</strong>하게 되며 일부 호스팅에서 <strong>디스크 용량 초과 문제</strong>를 발생시킵니다.</p>
                                     </div>
                                 </div>
                             </div>
